@@ -1,12 +1,14 @@
 #include <iostream>
 #include "languagenut/languagenut.hpp"
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::string token = languagenut::login("CharlesW", "badger7179");
-    std::vector<languagenut::types::global_user> users = languagenut::get_global_rankings(token, 5000);
-    for (languagenut::types::global_user u : users)
+    if (argc < 3)
     {
-        std::cout << u.flag << std::endl;
+        std::cout << "Usage: " << argv[0] << " username password" << std::endl;
+        return 0;
     }
+    std::string token = languagenut::login(std::string(argv[1]), std::string(argv[2]));
+    json t = languagenut::get_translations();
+    std::cout << t["191551"] << std::endl;
 }
