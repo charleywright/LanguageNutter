@@ -10,9 +10,8 @@
 #include "json.hpp"
 
 using json = nlohmann::json;
-#pragma once
 
-namespace languagenut::types
+namespace languagenut
 {
     bool str_to_bool(std::string str)
     {
@@ -22,7 +21,10 @@ namespace languagenut::types
         is >> std::boolalpha >> b;
         return b;
     }
+}
 
+namespace languagenut::types
+{
     class task
     {
     public:

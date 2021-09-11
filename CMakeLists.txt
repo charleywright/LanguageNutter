@@ -5,5 +5,5 @@ set( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR} )
 find_package(CURL REQUIRED)
 
 add_executable(LanguageNutter src/main.cpp)
-include_directories(${CURL_INCLUDE_DIR} ${Taglib_INCLUDE_DIRS} "include")
+include_directories(${CURL_INCLUDE_DIR} ${Taglib_INCLUDE_DIRS} "include" "src")
 target_link_libraries(LanguageNutter ${CURL_LIBRARIES} ${Taglib_LIBRARIES})
