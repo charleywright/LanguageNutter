@@ -5,5 +5,7 @@
 #include "achievements.hpp"
 #include "skills.hpp"
 #include "translations.hpp"
+#include "account.hpp"
+#include "user_data.hpp"
 
 #pragma once

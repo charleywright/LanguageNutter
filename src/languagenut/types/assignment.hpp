@@ -1,21 +1,12 @@
-#include <sstream>
 #include "json.hpp"
 #include "task.hpp"
+#include "str_to_bool.hpp"
 
 using json = nlohmann::json;
 #pragma once
 
 namespace languagenut::types
 {
-    bool str_to_bool(std::string str)
-    {
-        std::transform(str.begin(), str.end(), str.begin(), ::tolower);
-        std::istringstream is(str);
-        bool b;
-        is >> std::boolalpha >> b;
-        return b;
-    }
-
     class assignment
     {
     public:
