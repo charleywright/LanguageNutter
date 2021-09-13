@@ -7,5 +7,6 @@
 #include "account.hpp"
 #include "vocab_screen.hpp"
 #include "user_data.hpp"
+#include "curriculum.hpp"
 
 #pragma once

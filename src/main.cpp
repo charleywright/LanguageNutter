@@ -17,6 +17,4 @@ int main(int argc, char *argv[])
         return 0;
     }
     client.init();
-    languagenut::types::user_data d = client.get_user_data();
-    std::cout << d.gold_medals << std::endl;
 }
