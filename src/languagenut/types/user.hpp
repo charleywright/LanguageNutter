@@ -1,4 +1,5 @@
 #include "json.hpp"
+#include "json_helpers.hpp"
 
 using json = nlohmann::json;
 #pragma once
@@ -10,10 +11,10 @@ namespace languagenut::types
     public:
         user(json parsed)
         {
-            this->uid = std::stoi(parsed.value("uid", "")); // LanguageNut returns numbers as strings ("1234"), so stoi is needed
-            this->name = parsed.value("name", "");
-            this->is_user = (bool)std::stoi(parsed.value("isUser", "0"));
-            this->score = std::stoi(parsed.value("score", "0"));
+            this->uid = get_int(parsed, "uid");
+            this->name = get_str(parsed, "name");
+            this->is_user = (bool)get_int(parsed, "isUser");
+            this->score = get_int(parsed, "score");
         };
         int uid;
         std::string name;
@@ -26,20 +27,16 @@ namespace languagenut::types
     public:
         global_user(json parsed)
         {
-            this->user_uid = std::stoi(parsed.value("user_uid", ""));
-            this->key = parsed.value("key", this->key);
-            this->name = parsed.value("name", this->name);
-            this->score = std::stoi(parsed.value("score", ""));
-            if (parsed["flag"].type_name() == "null")
-                parsed["flag"] = "null";
-            this->flag = parsed.value("flag", this->flag);
-            this->blocked = (bool)std::stoi(parsed.value("blocked", ""));
-            this->account_uid = std::stoi(parsed.value("account_uid", ""));
-            this->plain_name = parsed.value("plain_name", this->plain_name);
-            if (parsed["user_language"].type_name() == "null")
-                parsed["user_language"] = "null";
-            this->user_language = parsed.value("user_language", this->user_language);
-            this->rank = parsed.value("rank", this->rank);
+            this->user_uid = get_int(parsed, "user_uid");
+            this->key = get_str(parsed, "key");
+            this->name = get_str(parsed, "name");
+            this->score = get_int(parsed, "score");
+            this->flag = get_str(parsed, "flag");
+            this->blocked = (bool)get_int(parsed, "blocked");
+            this->account_uid = get_int(parsed, "account_uid");
+            this->plain_name = get_str(parsed, "plain_name");
+            this->user_language = get_str(parsed, "user_language");
+            this->rank = get_int(parsed, "rank");
         };
         int user_uid;
         std::string key;

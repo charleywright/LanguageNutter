@@ -1,4 +1,5 @@
 #include "json.hpp"
+#include "json_helpers.hpp"
 #include <vector>
 
 using json = nlohmann::json;
@@ -11,11 +12,11 @@ namespace languagenut::types
     public:
         vocab_screen(json parsed)
         {
-            this->uid = std::stoi(parsed.value("uid", ""));
-            this->start_screen = std::stoi(parsed.value("start_screen", ""));
-            this->title = parsed.value("title", "");
-            this->additional_information = parsed.value("additionalInformation", "");
-            this->group_id = parsed.value("group_id", "");
+            this->uid = get_int(parsed, "uid");
+            this->start_screen = get_int(parsed, "start_screen");
+            this->title = get_str(parsed, "title");
+            this->additional_information = get_str(parsed, "additionalInformation");
+            this->group_id = get_str(parsed, "group_id");
             for (json i : parsed["languages"])
                 this->languages.push_back(i.value("ietf", ""));
         };

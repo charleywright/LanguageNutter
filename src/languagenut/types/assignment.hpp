@@ -1,6 +1,6 @@
 #include "json.hpp"
 #include "task.hpp"
-#include "str_to_bool.hpp"
+#include "json_helpers.hpp"
 
 using json = nlohmann::json;
 #pragma once
@@ -12,26 +12,26 @@ namespace languagenut::types
     public:
         assignment(json parsed)
         {
-            this->id = std::stoi(parsed.value("id", ""));
-            this->favourite = std::stoi(parsed.value("favourite", ""));
-            for (auto i : parsed["tasks"])
+            this->id = get_int(parsed, "id");
+            this->favourite = get_int(parsed, "favourite");
+            for (json i : parsed["tasks"])
                 this->tasks.push_back(task(i));
-            this->language = std::stoi(parsed.value("language", ""));
-            this->language_code = parsed.value("languageCode", this->language_code);
-            this->created_by = std::stoi(parsed.value("createdBy", ""));
-            this->total_students_cal = std::stoi(parsed.value("totalStudentsCal", ""));
-            this->completed = parsed.value("completed", this->completed);
-            this->comment = parsed.value("comment", this->comment);
-            this->homework_comment = parsed.value("homework_comment", this->homework_comment);
-            this->audio = parsed.value("audio", this->audio);
-            this->due = parsed.value("due", this->due);
-            this->set = parsed.value("set", this->set);
-            this->name = parsed.value("name", this->name);
-            this->estimated_time = parsed.value("estimated_time", this->estimated_time);
-            this->is_repeatable = str_to_bool(parsed.value("isRepeatable", "false"));
-            this->is_practice = str_to_bool(parsed.value("isPractice", "false"));
-            this->is_test_mode = str_to_bool(parsed.value("isTestMode", "false"));
-            this->is_complete = str_to_bool(parsed.value("isComplete", "false"));
+            this->language = get_int(parsed, "language");
+            this->language_code = get_str(parsed, "languageCode");
+            this->created_by = get_int(parsed, "createdBy");
+            this->total_students_cal = get_int(parsed, "totalStudentsCal");
+            this->completed = get_int(parsed, "completed");
+            this->comment = get_str(parsed, "comment");
+            this->homework_comment = get_str(parsed, "homework_comment");
+            this->audio = get_str(parsed, "audio");
+            this->due = get_str(parsed, "due");
+            this->set = get_str(parsed, "set");
+            this->name = get_str(parsed, "name");
+            this->estimated_time = get_int(parsed, "estimated_time");
+            this->is_repeatable = get_str_bool(parsed, "isRepeatable");
+            this->is_practice = get_str_bool(parsed, "isPractice");
+            this->is_test_mode = get_str_bool(parsed, "isTestMode");
+            this->is_complete = get_str_bool(parsed, "isComplete");
         };
         int id;
         int favourite;

@@ -1,4 +1,5 @@
 #include "json.hpp"
+#include "json_helpers.hpp"
 
 using json = nlohmann::json;
 #pragma once
@@ -12,20 +13,18 @@ namespace languagenut::types
         {
             for (json i : parsed["additionalVocabScreens"])
                 this->additional_vocab_screens.push_back(vocab_screen(i));
-            this->introduction_video = parsed.value("IntroductionVideo", "");
-            this->user_type = parsed.value("userType", "");
-            this->user_name = parsed.value("userName", "");
-            this->name = parsed.value("name", "");
-            if (parsed["displayName"].type_name() == "null")
-                parsed["displayName"] = "";
-            this->display_name = parsed.value("displayName", "");
-            this->gold_medals = std::stoi(parsed.value("goldMedals", ""));
-            this->silver_medals = std::stoi(parsed.value("silverMedals", ""));
-            this->bronze_medals = std::stoi(parsed.value("bronzeMedals", ""));
-            this->total_score = std::stoi(parsed.value("totalScore", ""));
-            this->rank = std::stoi(parsed.value("rank", ""));
-            this->country = parsed.value("country", "");
-            this->style = parsed.value("style", "");
+            this->introduction_video = get_str(parsed, "IntroductionVideo");
+            this->user_type = get_str(parsed, "userType");
+            this->user_name = get_str(parsed, "userName");
+            this->name = get_str(parsed, "name");
+            this->display_name = get_str(parsed, "displayName");
+            this->gold_medals = get_int(parsed, "goldMedals");
+            this->silver_medals = get_int(parsed, "silverMedals");
+            this->bronze_medals = get_int(parsed, "bronzeMedals");
+            this->total_score = get_int(parsed, "totalScore");
+            this->rank = get_int(parsed, "rank");
+            this->country = get_str(parsed, "country");
+            this->style = get_str(parsed, "style");
             for (std::string i : parsed["curriculum"])
                 this->curriculum.push_back(std::stoi(i));
             for (std::string i : parsed["groups"])
@@ -36,21 +35,19 @@ namespace languagenut::types
                 this->secondary_end_dates.push_back(i.value("end_date", ""));
             for (json i : parsed["ESOLEndDates"])
                 this->esol_end_dates.push_back(i.value("end_date", ""));
-            this->override_logo = parsed.value("overrideLogo", "");
-            this->account_name = parsed.value("acocuntName", "");
-            this->days_left_of_subscription = parsed.value("daysLeftOfSubscription", 0);
-            this->words_learnt = parsed.value("wordsLearnt", 0);
+            this->override_logo = get_str(parsed, "overrideLogo");
+            this->account_name = get_str(parsed, "acocuntName");
+            this->days_left_of_subscription = get_int(parsed, "daysLeftOfSubscription");
+            this->words_learnt = get_int(parsed, "wordsLearnt");
             this->is_live = parsed.value("isLive", true);
-            this->account_uid = std::stoi(parsed.value("accountUid", ""));
-            if (parsed["secondLoginType"].type_name() == "null")
-                parsed["secondLoginType"] = "";
-            this->second_login_type = parsed.value("secondLoginType", "");
-            this->user_uid = std::stoi(parsed.value("userUid", ""));
-            this->tested = (bool)parsed.value("tested", 1);
-            this->account_type = parsed.value("account_type", "");
+            this->account_uid = get_int(parsed, "accountUid");
+            this->second_login_type = get_str(parsed, "secondLoginType");
+            this->user_uid = get_int(parsed, "userUid");
+            this->tested = (bool)get_int(parsed, "tested");
+            this->account_type = get_str(parsed, "account_type");
             this->account_settings = accountsettings(parsed["accountSettings"]);
-            this->homework_counter = std::stoi(parsed.value("homeworkCounter", ""));
-            this->is_cefr = (bool)std::stoi(parsed.value("is_cefr", ""));
+            this->homework_counter = get_int(parsed, "homeworkCounter");
+            this->is_cefr = (bool)get_int(parsed, "is_cefr");
         };
         std::vector<types::vocab_screen> additional_vocab_screens;
         std::string introduction_video;

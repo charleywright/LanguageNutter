@@ -8,7 +8,15 @@ int main(int argc, char *argv[])
         std::cout << "Usage: " << argv[0] << " username password" << std::endl;
         return 0;
     }
-    std::string token = languagenut::login(std::string(argv[1]), std::string(argv[2]));
-    languagenut::types::user_data acc = languagenut::get_user_data(token);
-    std::cout << acc.name << std::endl;
+
+    languagenut::client client;
+    bool valid = client.login(argv[1], argv[2]);
+    if (!valid)
+    {
+        std::cout << "Invalid username or password" << std::endl;
+        return 0;
+    }
+    client.init();
+    languagenut::types::user_data d = client.get_user_data();
+    std::cout << d.gold_medals << std::endl;
 }
