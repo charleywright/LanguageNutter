@@ -25,6 +25,7 @@ namespace languagenut
         types::curriculum get_curriculum(int uid);
         std::vector<types::curriculum_data> get_curriculums();
         std::vector<types::module> get_module_ids(int uid, bool customContent = false, bool order_game_type = true);
+        std::vector<types::exam_level> get_exam_levels(int uid);
         std::string translate(int id) { return this->m_translations.value(std::to_string(id), ""); };
         std::string translate_module(int id) { return this->m_module_translations.value(std::to_string(id), ""); };
 

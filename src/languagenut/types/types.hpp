@@ -11,5 +11,6 @@
 #include "curriculum_data.hpp"
 #include "module.hpp"
 #include "exam_data.hpp"
+#include "exam_level.hpp"
 
 #pragma once
