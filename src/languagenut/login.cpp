@@ -2,13 +2,22 @@
 #include <curl/curl.h>
 #include "json.hpp"
 #include "write_callback.hpp"
-
-#include <iostream>
+#include <chrono>
 
 bool languagenut::client::login(std::string username, std::string password)
 {
-    curl_easy_setopt(this->m_curl, CURLOPT_URL, "https://api.languagenut.com/loginController/attemptlogin");
-    std::string body = std::string("username=").append(username).append("&pass=").append(password);
+    std::string epoch = std::to_string(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now().time_since_epoch()).count());
+    std::string url = "https://api.languagenut.com/loginController/attemptlogin?cacheBreaker=";
+    url.append(epoch);
+    curl_easy_setopt(this->m_curl, CURLOPT_URL, url.c_str());
+    std::string body = "apiVersion=8&languagenutTimeMarker=";
+    body.append(epoch);
+    body.append("&lastLanguagenutTimeMarker=");
+    body.append(epoch);
+    body.append("&username=");
+    body.append(username);
+    body.append("&pass=");
+    body.append(password);
     curl_easy_setopt(this->m_curl, CURLOPT_POSTFIELDS, body.c_str());
     struct curl_slist *headers = NULL;
     headers = curl_slist_append(headers, "Content-Type: application/x-www-form-urlencoded");

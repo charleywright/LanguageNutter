@@ -2,14 +2,22 @@
 #include <curl/curl.h>
 #include "json.hpp"
 #include "write_callback.hpp"
+#include <chrono>
 
 nlohmann::json languagenut::client::authed_request(std::string path, std::string data)
 {
     std::string url = "https://api.languagenut.com/";
     url.append(path);
+    url.append("?cacheBreaker=");
+    std::string epoch = std::to_string(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now().time_since_epoch()).count());
+    url.append(epoch);
     curl_easy_setopt(this->m_curl, CURLOPT_URL, url.c_str());
-    std::string body = "token=";
+    std::string body = "apiVersion=8&token=";
     body.append(this->m_token);
+    body.append("&languagenutTimeMarker=");
+    body.append(epoch);
+    body.append("&lastLanguagenutTimeMarker");
+    body.append(epoch);
     if (data.length() > 0)
     {
         body.append("&");
