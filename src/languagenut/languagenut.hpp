@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include "json.hpp"
+#include <curl/curl.h>
 #include "types/types.hpp"
 
 #pragma once
@@ -10,7 +11,7 @@ namespace languagenut
     class client
     {
     public:
-        client(){};
+        client() { this->m_curl = curl_easy_init(); };
         bool login(std::string username, std::string password);
         void init(std::string lang = "en");
         types::account get_account();
@@ -29,6 +30,7 @@ namespace languagenut
 
     private:
         nlohmann::json authed_request(std::string path, std::string body = "");
+        CURL *m_curl;
         std::string m_token;
         nlohmann::json m_translations;
         nlohmann::json m_module_translations;
