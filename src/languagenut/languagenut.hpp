@@ -27,6 +27,7 @@ namespace languagenut
         std::vector<types::module> get_module_ids(int uid, bool customContent = false, bool order_game_type = true);
         std::vector<types::exam_level> get_exam_levels(int uid);
         std::vector<types::verb> get_verb_categories(std::string lang, int verbUid = 0);
+        std::vector<types::verb_translation> get_verb_translations(int uid, int game_id, std::string from, std::string to);
         std::string translate(int id) { return this->m_translations.value(std::to_string(id), ""); };
         std::string translate_module(int id) { return this->m_module_translations.value(std::to_string(id), ""); };
 
