@@ -12,5 +12,6 @@
 #include "module.hpp"
 #include "exam_data.hpp"
 #include "exam_level.hpp"
+#include "verb.hpp"
 
 #pragma once
