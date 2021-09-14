@@ -9,5 +9,7 @@
 #include "user_data.hpp"
 #include "curriculum.hpp"
 #include "curriculum_data.hpp"
+#include "module.hpp"
+#include "exam_data.hpp"
 
 #pragma once

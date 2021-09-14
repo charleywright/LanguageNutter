@@ -19,6 +19,8 @@ namespace languagenut::types
     {
         if (j[prop].is_null())
             return 0;
+        if (j.value(prop, "").length() == 0)
+            return 0;
         return j[prop].is_number() ? j.value(prop, 0) : std::stoi(j.value(prop, "0"));
     }
 

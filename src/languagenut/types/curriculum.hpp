@@ -14,7 +14,7 @@ namespace languagenut::types
             this->exam_screen = get_int(parsed, "examScreen");
             this->grammar_screen = get_int(parsed, "grammarScreen");
             this->sentence_screen = get_int(parsed, "sentenceScreen");
-            this->start_screen = get_int(parsed, "startScreen");
+            this->vocab_screen = get_int(parsed, "startScreen");
             this->topic_screen = get_int(parsed, "topicScreen");
             this->is_curric_product = (bool)get_int(parsed, "isCurricProduct");
             this->is_trial = (bool)get_int(parsed, "isTrial");
@@ -30,7 +30,7 @@ namespace languagenut::types
         int exam_screen;
         int grammar_screen;
         int sentence_screen;
-        int start_screen;
+        int vocab_screen;
         int topic_screen;
         bool is_curric_product;
         bool is_trial;
